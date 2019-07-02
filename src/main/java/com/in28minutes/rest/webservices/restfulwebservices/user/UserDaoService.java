@@ -16,6 +16,8 @@ public class UserDaoService {
 	// Create a static method so that when this class is called, these data are
 	// initialized.
 	static {
+		// new Date() in older versions of Spring Boot it will return integers of
+		// current Date
 		users.add(new User(1, "Adam", new Date()));
 		users.add(new User(2, "Eve", new Date()));
 		users.add(new User(3, "Jack", new Date()));
