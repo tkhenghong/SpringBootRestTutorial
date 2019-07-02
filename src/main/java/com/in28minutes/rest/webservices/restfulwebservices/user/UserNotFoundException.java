@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // Example of returning HTTP NOT FOUND status
 // DON'T extends normalException
 // You don't want to return 500 Internal Error. You need to add the below response status to indicate it is not found
+// Step 1: Define your Exception class 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends RuntimeException {
 

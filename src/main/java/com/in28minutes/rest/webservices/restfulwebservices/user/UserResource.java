@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 // DB(Model) -> DAO -> Resource (Lowest to Highest)
 
 @RestController
-public class UserResource {
+public class UserResource { // *UserResource may be called as UserController in other developer's term (WE
+							// ARE USING IT)
+	// If this class called UserResource, other classes will call XXXResouce, be
+	// consistent.
 
 	// We created a UserDaoService in another place with @Component, now we can call
 	// the component here and tell Spring to
@@ -71,6 +75,27 @@ public class UserResource {
 		return ResponseEntity.created(location).build();
 		// The server returns 201 Created status code, with a Location of
 		// http://localhost:8080/users/4 <-- new ID of the user
+	}
+
+	// Retrieve all post for a User - GET /users/{id}/posts
+	@GetMapping("/users/{id}/posts")
+	public User getUserPosts(@PathVariable int id) {
+		User user = service.findOne(id);
+		if (user == null) {
+			throw new UserNotFoundException("id-" + id);
+		}
+		return user;
+	}
+
+	// Create a post for a User - POST /users/{id}/posts
+	@PostMapping("/users/{id}/posts")
+	public void createUserPost(@PathVariable String id, @ResponseBody Post post) {
+
+	}
+
+	// Retrieve details of a post - GET /users/{id}/posts/{post_id}
+	public void getPostDetails(@PathVariable int id, @PathVariable String post_id) {
+
 	}
 
 }
