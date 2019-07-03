@@ -3,13 +3,15 @@ package com.in28minutes.rest.webservices.restfulwebservices.user;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,6 +27,7 @@ public class UserResource { // *UserResource may be called as UserController in 
 	// the component here and tell Spring to
 	// instantiate the component using @Autowired without us having to do
 	// UserDaoService service = new UserDaoService();
+
 	@Autowired
 	private UserDaoService service;
 
@@ -46,6 +49,21 @@ public class UserResource { // *UserResource may be called as UserController in 
 		return user;
 	}
 
+	// Delete a user
+	// Test DELETE http://localhost:8080/users/1000
+	// DELETE http://localhost:8080/users/1
+	// GET http://localhost:8080/users/
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable int id) {
+		User user = service.deleteById(id);
+		if (user == null) {
+			throw new UserNotFoundException("id-" + id);
+		}
+		// If success, it will return status 200, if not return UserNotFoundException
+	}
+
+	// HATEOS
+
 	// Remember, in Postman set POST, write the correct URL, send the body like this
 	// and set it to JSON format (no need id property):
 	// {
@@ -56,9 +74,13 @@ public class UserResource { // *UserResource may be called as UserController in 
 	// Input - Details of the user
 	// Output - return created user and return create URI
 	// This is a good example to follow HTTP best practices when returning something
+	// Remember to add validations
+	// Validation libraries that are commonly used in Spring:
+	// 1. Hibernate validator
+	// 2. Validator API
 	@PostMapping("/users")
 	// RequestBody is the data when we sent using Postman
-	public ResponseEntity<Object> createUser(@RequestBody User user) {
+	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		User savedUser = service.save(user);
 
 		// How to response the user's request formally? Giving the user back the current
@@ -77,25 +99,25 @@ public class UserResource { // *UserResource may be called as UserController in 
 		// http://localhost:8080/users/4 <-- new ID of the user
 	}
 
-	// Retrieve all post for a User - GET /users/{id}/posts
-	@GetMapping("/users/{id}/posts")
-	public User getUserPosts(@PathVariable int id) {
-		User user = service.findOne(id);
-		if (user == null) {
-			throw new UserNotFoundException("id-" + id);
-		}
-		return user;
-	}
+//	// Retrieve all post for a User - GET /users/{id}/posts
+//	@GetMapping("/users/{id}/posts")
+//	public User getUserPosts(@PathVariable int id) {
+//		User user = service.findOne(id);
+//		if (user == null) {
+//			throw new UserNotFoundException("id-" + id);
+//		}
+//		return user;
+//	}
 
-	// Create a post for a User - POST /users/{id}/posts
-	@PostMapping("/users/{id}/posts")
-	public void createUserPost(@PathVariable String id, @ResponseBody Post post) {
-
-	}
-
-	// Retrieve details of a post - GET /users/{id}/posts/{post_id}
-	public void getPostDetails(@PathVariable int id, @PathVariable String post_id) {
-
-	}
+//	// Create a post for a User - POST /users/{id}/posts
+//	@PostMapping("/users/{id}/posts")
+//	public void createUserPost(@PathVariable String id, @ResponseBody Post post) {
+//
+//	}
+//
+//	// Retrieve details of a post - GET /users/{id}/posts/{post_id}
+//	public void getPostDetails(@PathVariable int id, @PathVariable String post_id) {
+//
+//	}
 
 }
