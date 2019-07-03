@@ -22,7 +22,7 @@ import com.in28minutes.rest.webservices.restfulwebservices.helloworld.HelloWorld
 // Spring Boot auto configuration includes:
 // Dispatcher Servlet
 // HttpMessage ConverterAutoConfiguration
-// spring.boot.starter.web has dependency on spring.web.MVC framework
+// spring.boot.starter.web that has dependency on spring.web.MVC framework
 // ErrorMvcAutoConfiguration = Configuration on making your error page
 // ErrorMvcAutoConfiguration#basicErrorController and ErrorMvcAutoConfiguration#errorAttributes 
 // ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration is the one that shows your error page on the web
@@ -32,7 +32,7 @@ import com.in28minutes.rest.webservices.restfulwebservices.helloworld.HelloWorld
 // DispatcherServlet is the front controller for the Spring Boot Web MVC framework
 // So it knows that "this" URL is mapped into which method in the Controller classes. (If you look at your log properly) 
 
-// @RestController is an annotation 
+// @RestController is an annotation that contains a lot of other annotations, including @Controller
 
 //Step 1 : Tell Spring that this is a RestController to handle REST request
 @RestController
@@ -52,7 +52,6 @@ public class HelloWorldController {
 
 	// You can straight call GetMapping for @RequestMapping with GET
 	@GetMapping(path = "/hello-world2")
-
 	public String helloWorld2() {
 		return "Hello World2";
 	}
@@ -71,8 +70,8 @@ public class HelloWorldController {
 		return new HelloWorldBean(String.format("Hello World, %s", name));
 	}
 
-	// Wow, my own new discovery, there's a class that writes toString(), but
-	// doesn't need hard coding (View it's implementation)
+	// There's a class that writes toString() effortlessly,
+	// it doesn't need hard coding (View it's implementation)
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

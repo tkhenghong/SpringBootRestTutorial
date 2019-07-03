@@ -13,7 +13,7 @@ public class User {
 	private String name;
 	private Date birthDate;
 
-	// Latest Spring doesn't show 500 Internal Server error, older version will show
+	// Latest Spring doesn't show 500 Internal Server error, older version will show error
 	// if you don't mention this empty constructor
 	protected User() {
 	}
