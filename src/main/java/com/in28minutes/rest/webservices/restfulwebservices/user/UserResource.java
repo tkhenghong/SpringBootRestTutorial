@@ -1,11 +1,17 @@
 package com.in28minutes.rest.webservices.restfulwebservices.user;
 
+// import ControllerLinkBuilder here
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,12 +47,23 @@ public class UserResource { // *UserResource may be called as UserController in 
 	// GET/users/{id}
 	// Good example practice of handling when user is not found
 	@GetMapping("/users/{id}")
-	public User retreiveUser(@PathVariable int id) {
+	public Resource<User> retreiveUser(@PathVariable int id) {
 		User user = service.findOne(id);
 		if (user == null) {
 			throw new UserNotFoundException("id-" + id);
 		}
-		return user;
+
+		// HATEOS: It will give additional links to the browser so you can do some
+		// action on it (Not understand)
+		// "all-users", SERVER_PATH + "/users"
+		// We will add a link to this method (retreiveAllUsers)
+		Resource<User> resource = new Resource<User>(user);
+		// Create a link from another method in this class
+		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retreiveAllUsers()); // From import static
+		// Attach this link to the server response // ControllerLinkBuilder.*
+		resource.add(linkTo.withRel("all-users"));
+
+		return resource;
 	}
 
 	// Delete a user
@@ -61,8 +78,6 @@ public class UserResource { // *UserResource may be called as UserController in 
 		}
 		// If success, it will return status 200, if not return UserNotFoundException
 	}
-
-	// HATEOS
 
 	// Remember, in Postman set POST, write the correct URL, send the body like this
 	// and set it to JSON format (no need id property):
