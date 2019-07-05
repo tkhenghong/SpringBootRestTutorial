@@ -54,6 +54,10 @@ public class UserResource { // *UserResource may be called as UserController in 
 		}
 
 		// HATEOS: It will give additional links to the browser so you can do some
+		// Not commonly used in current applications because the devs haven't found very
+		// good reason to use them
+		// But very good practice so end users can simply use those links given by
+		// server
 		// action on it (Not understand)
 		// "all-users", SERVER_PATH + "/users"
 		// We will add a link to this method (retreiveAllUsers)
