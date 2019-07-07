@@ -28,12 +28,39 @@
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
 
+		<!-- Remove version tag so SPRING will handle itself -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-hateoas -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-hateoas</artifactId>
 		</dependency>
+		
+		
+		<!-- Convert object to XML instead of JSON object using Jackson -->
+		<!-- Now you can ask the server to return your response in JSON or XML format -->
+		<!-- Headers: Accept: application/xml , application/json -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.dataformat</groupId>
+		    <artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
 
+		<!-- This dependency is used to tell other devs about how to use this SPRING server -->
+		<!-- Because RESTful services doesn't have standards of receiving and replying requests -->
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

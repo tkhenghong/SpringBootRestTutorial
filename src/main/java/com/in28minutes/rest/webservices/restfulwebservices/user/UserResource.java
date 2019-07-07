@@ -54,11 +54,11 @@ public class UserResource { // *UserResource may be called as UserController in 
 		}
 
 		// HATEOS: It will give additional links to the browser so you can do some
+		// action on it (Not understand)
 		// Not commonly used in current applications because the devs haven't found very
 		// good reason to use them
 		// But very good practice so end users can simply use those links given by
 		// server
-		// action on it (Not understand)
 		// "all-users", SERVER_PATH + "/users"
 		// We will add a link to this method (retreiveAllUsers)
 		Resource<User> resource = new Resource<User>(user);
@@ -86,7 +86,7 @@ public class UserResource { // *UserResource may be called as UserController in 
 	// Remember, in Postman set POST, write the correct URL, send the body like this
 	// and set it to JSON format (no need id property):
 	// {
-	// "name": "Nick",
+	// "name": "Nick"
 	// "birthDate": "6346-07-01T15:04:10.474+0000"
 	// }
 	// Create a user
