@@ -34,9 +34,9 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		// Don't expose anything that security sensitive
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
 				request.getDescription(false));
-
+		// Question: ResponseEntity is a raw type. References to generic type ResponseEntity<T> should be parameterized
+		// Answer: https://stackoverflow.com/questions/20451096/why-am-i-getting-the-warning-class-is-a-raw-type-references-to-generic-type-cl
 		return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
 
 	@ExceptionHandler(UserNotFoundException.class)
