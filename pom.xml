@@ -61,7 +61,36 @@
 		    <version>2.9.2</version>
 		</dependency>
 		
-
+		<!-- Spring Actuator is a monitoring libraries to check the traffic of our every single APIs -->
+		<!-- Monitoring our app, gathering metrics, understanding traffic or the state of our database becomes trivial with this dependency. -->
+		<!-- Monitor the APIs using the following link: -->
+		<!-- http://localhost:8080/actuator -->
+		<!-- http://localhost:8080/actuator/health -->
+		<!-- http://localhost:8080/actuator/info -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!-- Spring Data Rest HAL Browser -->
+		<!-- Hypertext Application Language -->
+		<!-- This library used to look at the APIs, recognizes links and allow us to browse those links from Spring Boot Actuator -->
+		<!-- View Spring Boot Actuator in UI using this link: -->
+		<!-- http://localhost:8080/browser/index.html#/ -->
+		<!-- http://localhost:8080/actuator/beans -->
+		<!-- http://localhost:8080/actuator/conditions -->
+		<!-- http://localhost:8080/actuator/metrics -->
+		<!-- http://localhost:8080/actuator/metrics/jvm.memory.used -->
+		<!-- http://localhost:8080/actuator/httptrace : View the previous request that are executed in this app -->
+		<!-- http://localhost:8080/actuator/mappings : Show all the mappings that are made to use URLs -->
+		<!-- We can use HAL browser to go through Spring Boot Actuators -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-rest-hal-browser -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-rest-hal-browser</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
