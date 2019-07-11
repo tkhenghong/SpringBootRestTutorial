@@ -1,11 +1,13 @@
 package com.in28minutes.rest.webservices.restfulwebservices.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
-// This class is Static ignore (You write ignore annotation it will block in all conditions
-// Dynamic ignore means it will ignore BASED on certain conditions (Like in condition A it will block field1, but in condition B it will block field2)
+// This class is Static filtering (You write ignore annotation it will block in all conditions
+// Dynamic filtering means it will ignore BASED on certain conditions (Like in condition A it will block field1, but in condition B it will block field2)
 // If there are more fields to block, it's recommended to use @JsonIgnoreProperties to block them on top of the class
-@JsonIgnoreProperties(value = { "field1", "field2" })
+//@JsonIgnoreProperties(value = { "field1", "field2" })
+// Dynamic filter (paired with /filtering2 API)
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
 	private String field1;
 	private String field2;
