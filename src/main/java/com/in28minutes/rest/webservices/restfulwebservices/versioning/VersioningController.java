@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 //API Documentation
 //No Perfect Solution
 
+// Authentication with Spring Security
 @RestController
 public class VersioningController {
 

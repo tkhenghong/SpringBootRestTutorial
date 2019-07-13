@@ -91,6 +91,16 @@
 		    <artifactId>spring-data-rest-hal-browser</artifactId>
 		</dependency>
 		
+		<!-- Authentication with Spring Boot Security -->
+		<!-- Every time you launch your server, it will log a temporary password so you can access the resource of your server -->
+		<!-- Search something like this: Using generated security password: 0a6e327b-219e-487d-9afb-1f6953cba85a -->
+		<!-- Go to Postman, set Authorization type to Basic Auth, set Username: user, and Password: *PASSWORD ABOVE* -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
