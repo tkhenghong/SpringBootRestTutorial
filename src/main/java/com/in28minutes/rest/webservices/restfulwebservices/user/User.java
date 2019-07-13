@@ -2,11 +2,17 @@ package com.in28minutes.rest.webservices.restfulwebservices.user;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+// JPA Step 5:  Restart the server, you will found a line that says: 
+// create table user (id integer not null, birth_date timestamp, name varchar(255), primary key (id))
 
 // Create an object to be the model of the database
 // Step 1: Create the Bean
@@ -15,12 +21,20 @@ import io.swagger.annotations.ApiModelProperty;
 // to talk to the database and get the details back.
 // Write @ApiModel to tell the devs about the validation about the User model object (Swagger)
 @ApiModel(description = "All details about the user.")
+// Spring JPA (Like Hibernate, basically it's ORM for Java)
+// It can help you create a database based on your object model classes (Like this class below)
+// JPA Step 1: Create Entity 
+@Entity
 public class User {
 // Remember to add validation of the DB Model itself
 
 	// Validation libraries that are commonly used in Spring:
 	// 1. Hibernate validator
 	// 2. Validator API
+	// JPA Step 2: Define id with @Id & @GeneratedValue <-- Auto creates an Id for
+	// you
+	@Id
+	@GeneratedValue
 	private Integer id;
 
 	// You can mention the limitation WITH the message when the data given is wrong
