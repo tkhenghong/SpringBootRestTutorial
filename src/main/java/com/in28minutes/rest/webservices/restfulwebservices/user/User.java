@@ -1,10 +1,12 @@
 package com.in28minutes.rest.webservices.restfulwebservices.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -48,6 +50,9 @@ public class User {
 	@ApiModelProperty(notes = "Birth date should be in the past.")
 	private Date birthDate;
 
+	@OneToMany(mappedBy = "user") // mappedBy the name of the User object field of Post table
+	private List<Post> posts; // One User has many posts
+
 	// Latest Spring doesn't show 500 Internal Server error, older version will show
 	// error.
 	// if you don't mention this empty constructor
@@ -85,9 +90,17 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
+		return "User [id=" + id + ", name=" + name + ", birthDate=" + birthDate + ", posts=" + posts + "]";
 	}
 
 }

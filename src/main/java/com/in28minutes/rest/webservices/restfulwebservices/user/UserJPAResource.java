@@ -31,9 +31,6 @@ public class UserJPAResource {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private UserDaoService service;
-
 	// http://localhost:8080/jpa/users
 	@GetMapping("/users")
 	public List<User> retreiveAllUsers() {
@@ -59,23 +56,41 @@ public class UserJPAResource {
 		return resource;
 	}
 
+	// DELETE localhost:8080/jpa/users/1
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
-		User user = service.deleteById(id);
-		if (user == null) {
-			throw new UserNotFoundException("id-" + id);
-		}
-
+		userRepository.deleteById(id);
 	}
 
+	// Post localhost:8080/jpa/users/
+	// Headers: Content-Type: application/json
+	// Body: Raw : JSON
+	// {
+	/*
+	 * "name": "Baby", "birthDate": "2019-07-13T16:00:00.000+0000" }
+	 */
+	// Hibernate may conflict due to previous created data IDs
+	// Like you have predefined data but Hibernate doesn't know and it wants to
+	// create a record with same ID
 	@PostMapping("/users")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-		User savedUser = service.save(user); // save() doesn't require you to explicitly mentioned in the UserRepository
-												// class
+		User savedUser = userRepository.save(user); // save() doesn't require you to explicitly mentioned in the
+													// UserRepository
+		// class
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
 				.toUri();
 
 		return ResponseEntity.created(location).build();
+	}
+
+	// GET localhost:8080/jpa/users/10001/posts
+	@GetMapping("/users/{id}/posts")
+	public List<Post> retrieveAllPost(@PathVariable int id) {
+		Optional<User> userOptional = userRepository.findById(id);
+		if (!userOptional.isPresent()) {
+			throw new UserNotFoundException("id-" + id);
+		}
+		return userOptional.get().getPosts();
 	}
 }
